@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>A Letter For You ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Poppins&family=Courier+Prime&display=swap" rel="stylesheet">
+<style>
+  body {
+    margin: 0;
+    padding: 50px 20px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    background: linear-gradient(135deg, #ffe6eb, #e0c3fc);
+    font-family: 'Poppins', sans-serif;
+    box-sizing: border-box;
+    /* "overflow: hidden;" is removed */
+  }
+  .content-wrapper {
+    text-align: center;
+    animation: fadeIn 2s;
+    width: 100%;
+  }
+  h2 {
+    font-family: 'Dancing Script', cursive;
+    font-size: 2.5rem;
+    color: #ff4f81;
+  }
+  #letter-content {
+    font-family: 'Courier Prime', monospace;
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #333;
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: left;
+    padding: 20px;
+    min-height: 100px;
+  }
+  .typing-effect {
+    width: 0;
+    overflow: hidden;
+    white-space: pre-wrap;
+    border-right: .15em solid #ff4f81;
+    animation:
+      typing 5s steps(200, end) forwards,
+      blink-caret .75s step-end infinite;
+  }
+  @keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+  }
+  @keyframes blink-caret {
+    from, to { border-color: transparent }
+    50% { border-color: #ff4f81; }
+  }
+  .heart {
+    position: fixed;
+    font-size: 20px;
+    animation: floatUp 5s linear infinite;
+    pointer-events: none;
+    z-index: -1;
+  }
+  @keyframes floatUp {
+    from { transform: translateY(0); opacity: 1; }
+    to { transform: translateY(-1000px); opacity: 0; }
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* --- NEW: MOBILE OPTIMIZATION --- */
+  @media (max-width: 600px) {
+    body {
+        padding: 20px 15px;
+    }
+    h2 {
+        font-size: 2rem;
+    }
+    #letter-content {
+        font-size: 1rem;
+        padding: 15px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<div class="content-wrapper">
+  <h2>A Letter For You... 💌</h2>
+  <p id="letter-content"></p>
+</div>
+
+<script>
+  const letterContent = document.getElementById("letter-content");
+  const myLetter = `My dearest Riya,
+
+It feels so special to celebrate one month with you. I truly thank God for bringing you into my life. In this short time, you have become my favorite person — the one I look for when the day begins and the one I want to end my day with. You are my safe place, my joy, and my answered prayer.
+
+Every morning, the first thought that comes to me is you. And every night before I sleep, I whisper a prayer for you. Your presence in my life is a blessing I never want to take for granted. You bring light to my mornings and peace to my nights. Even when we are not together, I feel close to you because God has tied our hearts with His love.
+
+I know our love is not just by chance, but by God’s perfect plan. With Him at the center, I believe we can face everything together. When I pray, I ask God to guide you, protect you, and make our bond stronger every day. With each passing moment, I see His hand in our journey, and it makes me so thankful and full of hope.
+
+You give me peace like no one else. When I hear your voice or see your smile, all my worries fade away. You make my days brighter and my heart calmer. Truly, you remind me of God’s kindness and care. Thank you for being someone who makes life so joyful and meaningful.
+
+I look forward to all the days to come — to grow with you, to pray with you, to laugh with you, and to love you more each day. I know that as long as we walk with Christ, our love will keep becoming deeper and stronger.
+
+I love you deeply, and I will always thank God for the gift of you.
+
+With all my love,
+Charlie`;
+  
+  window.addEventListener('load', () => {
+    letterContent.textContent = myLetter;
+    letterContent.classList.add("typing-effect");
+  });
+
+  function startHearts() {
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.textContent = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.fontSize = Math.random() * 20 + 15 + "px";
+      heart.style.animationDuration = (Math.random() * 5 + 5) + "s";
+      heart.style.top = "100vh";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 10000);
+    }, 300);
+  }
+  startHearts();
+</script>
+
+</body>
+</html>

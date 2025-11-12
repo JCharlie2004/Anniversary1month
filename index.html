@@ -185,45 +185,36 @@
 
 <script>
   const surpriseScreen = document.getElementById("surprise");
-  
   showSurprise();
 
   function showSurprise() {
     document.getElementById("countdown-screen").style.display = "none";
     surpriseScreen.style.display = "block";
-    startRunningTimer();
+    showFixedDuration();
   }
 
-  function startRunningTimer() {
+  function showFixedDuration() {
     const startDate = new Date("2025-07-22T05:00:00");
-    
-    const startDateEl = document.getElementById('start-date');
+    const stopDate = new Date("2025-11-09T00:00:00");
+
     const timerEl = document.getElementById('running-timer');
+    const startDateEl = document.getElementById('start-date');
 
-    const dateOptions = {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: 'numeric',
-        minute: 'numeric',
-        hour12: true
-    };
-    
-    // This line now replaces " at" with a comma
-    const formattedDate = startDate.toLocaleString('en-US', dateOptions).replace(' at', ',');
-    startDateEl.textContent = `Since: ${formattedDate}`;
-    
-    setInterval(() => {
-        const now = new Date();
-        const timeDifference = now.getTime() - startDate.getTime();
+    // Calculate time difference
+    const timeDifference = stopDate.getTime() - startDate.getTime();
+    const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
 
-        const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+    timerEl.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
 
-        timerEl.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-    }, 1000);
+    // Format readable date range
+    const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+    const startFormatted = startDate.toLocaleDateString('en-US', dateOptions);
+    const stopFormatted = stopDate.toLocaleDateString('en-US', dateOptions);
+
+    startDateEl.textContent = `From: ${startFormatted} to ${stopFormatted}`;
   }
 
   function startHearts() {
@@ -242,5 +233,7 @@
   startHearts();
 </script>
 
+
 </body>
+
 </html>

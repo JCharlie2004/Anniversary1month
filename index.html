@@ -156,8 +156,8 @@
 </div>
 
 <div id="surprise">
-  <h2>Happy Single Life</h2>
-  <p>May you be succesful in whatever you do</p>
+  <h2>Happy 1 Month, My Love ❤️</h2>
+  <p>You’ve made my life brighter, my days sweeter, and my heart fuller. Here are some of our moments from our First Date...</p>
 
   <div id="relationship-counter">
     <span class="label">Been together for</span>
@@ -185,36 +185,45 @@
 
 <script>
   const surpriseScreen = document.getElementById("surprise");
+  
   showSurprise();
 
   function showSurprise() {
     document.getElementById("countdown-screen").style.display = "none";
     surpriseScreen.style.display = "block";
-    showFixedDuration();
+    startRunningTimer();
   }
 
-  function showFixedDuration() {
+  function startRunningTimer() {
     const startDate = new Date("2025-07-22T05:00:00");
-    const stopDate = new Date("2025-11-09T00:00:00");
-
-    const timerEl = document.getElementById('running-timer');
+    
     const startDateEl = document.getElementById('start-date');
+    const timerEl = document.getElementById('running-timer');
 
-    // Calculate time difference
-    const timeDifference = stopDate.getTime() - startDate.getTime();
-    const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+    const dateOptions = {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: 'numeric',
+        minute: 'numeric',
+        hour12: true
+    };
+    
+    // This line now replaces " at" with a comma
+    const formattedDate = startDate.toLocaleString('en-US', dateOptions).replace(' at', ',');
+    startDateEl.textContent = `Since: ${formattedDate}`;
+    
+    setInterval(() => {
+        const now = new Date();
+        const timeDifference = now.getTime() - startDate.getTime();
 
-    timerEl.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        const days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
 
-    // Format readable date range
-    const dateOptions = { year: 'numeric', month: 'long', day: 'numeric' };
-    const startFormatted = startDate.toLocaleDateString('en-US', dateOptions);
-    const stopFormatted = stopDate.toLocaleDateString('en-US', dateOptions);
-
-    startDateEl.textContent = `From: ${startFormatted} to ${stopFormatted}`;
+        timerEl.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    }, 1000);
   }
 
   function startHearts() {
@@ -233,8 +242,5 @@
   startHearts();
 </script>
 
-
 </body>
-
 </html>
-
